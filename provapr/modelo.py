@@ -18,6 +18,10 @@ class ErroModelo(RuntimeError):
     """Tentativa falha: is_error, timeout, JSON inválido ou fora do esquema."""
 
 
+class SemRespostaGravada(ErroModelo):
+    """Replay sem a chave pedida: erro de uso (código 2), não tentativa falha."""
+
+
 def normalizar(prompt, raiz=None):
     texto = prompt.replace("\r\n", "\n")
     if raiz:
@@ -78,7 +82,7 @@ class ClaudeCLI(ProvedorModelo):
 class Gravador(ProvedorModelo):
     """Envolve outro provedor e anexa cada resposta válida ao .jsonl."""
 
-    def __init__(self, interno, caminho, raiz=None):
+    def __init__(self, interno, caminho, raiz=None, anexar=False):
         super().__init__()
         self.interno = interno
         self.caminho = Path(caminho)
@@ -86,23 +90,34 @@ class Gravador(ProvedorModelo):
         self.modelo = interno.modelo
         self.duracoes_ms = interno.duracoes_ms
         self.caminho.parent.mkdir(parents=True, exist_ok=True)
-        self.caminho.write_text("", encoding="utf-8")
+        if not anexar:
+            self.caminho.write_text("", encoding="utf-8")
 
     @property
     def chamadas_ao_vivo(self):
         return self.interno.chamadas_ao_vivo
 
     def responder(self, chamada, prompt, schema):
-        resposta = self.interno.responder(chamada, prompt, schema)
+        n = len(self.duracoes_ms)
         linha = {"versao": 1, "chamada": chamada,
                  "chave": chave(chamada, self.modelo, schema, prompt, self.raiz),
                  "modelo": self.modelo,
-                 "gravado_em": datetime.now().astimezone().isoformat(timespec="seconds"),
-                 "duracao_ms": self.duracoes_ms[-1] if self.duracoes_ms else None,
-                 "resposta": resposta}
+                 "gravado_em": datetime.now().astimezone().isoformat(timespec="seconds")}
+        try:
+            resposta = self.interno.responder(chamada, prompt, schema)
+        except ErroModelo as e:
+            # grava a tentativa falha para o replay seguir o mesmo caminho
+            linha.update(duracao_ms=None, resposta=None, erro=str(e))
+            self._anexar(linha)
+            raise
+        linha.update(duracao_ms=self.duracoes_ms[-1] if len(self.duracoes_ms) > n else None,
+                     resposta=resposta)
+        self._anexar(linha)
+        return resposta
+
+    def _anexar(self, linha):
         with self.caminho.open("a", encoding="utf-8") as f:
             f.write(json.dumps(linha, ensure_ascii=False) + "\n")
-        return resposta
 
 
 class Replay(ProvedorModelo):
@@ -122,10 +137,40 @@ class Replay(ProvedorModelo):
     def responder(self, chamada, prompt, schema):
         fila = self.filas.get(chave(chamada, self.modelo, schema, prompt, self.raiz))
         if not fila:
-            raise ErroModelo(f"replay sem resposta gravada para '{chamada}'")
+            raise SemRespostaGravada(f"replay sem resposta gravada para '{chamada}'")
         linha = fila.popleft()
+        if linha.get("erro"):
+            raise ErroModelo(linha["erro"])
         self.duracoes_ms.append(linha.get("duracao_ms"))
         try:
             return validar(linha["resposta"], schema)
         except ErroEsquema as e:
             raise ErroModelo(f"replay fora do esquema: {e}")
+
+
+class Completar(ProvedorModelo):
+    """--replay X --gravar X: responde do que já está gravado e só chama ao vivo
+    (anexando ao mesmo arquivo) o que falta. Mantém uma só extração por cenário."""
+
+    def __init__(self, interno, caminho, raiz=None):
+        super().__init__()
+        self.replay = Replay(caminho, interno.modelo, raiz)
+        self.gravador = Gravador(interno, caminho, raiz, anexar=True)
+        self.modelo = interno.modelo
+
+    @property
+    def chamadas_ao_vivo(self):
+        return self.gravador.chamadas_ao_vivo
+
+    def responder(self, chamada, prompt, schema):
+        try:
+            resposta = self.replay.responder(chamada, prompt, schema)
+            self.duracoes_ms.append(self.replay.duracoes_ms[-1])
+            return resposta
+        except SemRespostaGravada:
+            pass
+        n = len(self.gravador.duracoes_ms)
+        try:
+            return self.gravador.responder(chamada, prompt, schema)
+        finally:
+            self.duracoes_ms.extend(self.gravador.duracoes_ms[n:])
