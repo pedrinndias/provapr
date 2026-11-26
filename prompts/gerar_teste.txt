@@ -1,0 +1,28 @@
+Escreva UM método de teste JUnit 4 que mate o mutante abaixo.
+O teste precisa passar no código original e falhar no código mutado.
+
+Regras do corpo_metodo:
+- só as instruções de dentro do método, sem a assinatura e sem chaves externas;
+- crie o objeto com `new <<CLASSE>>()`;
+- use só assertEquals, assertTrue ou assertFalse (já importados);
+- nada de System.exit, java.io, java.net, Thread, reflexão ou Random.
+nome_teste: camelCase começando com "teste", descrevendo o caso.
+
+Classe sob teste (<<ARQUIVO>>):
+```java
+<<FONTE>>
+```
+
+Mutante alvo:
+- status: <<STATUS>>
+- método: <<METODO>>, linha <<LINHA>>
+- mutador: <<MUTADOR>>
+- descrição do PIT: <<DESCRICAO>>
+
+Testes que executaram esse código sem matar o mutante: <<COBRIDORES>>
+
+Critério de aceitação ligado: <<CRITERIO>>
+Exemplos do critério: <<EXEMPLOS>>
+
+Feedback das tentativas anteriores:
+<<FEEDBACK>>

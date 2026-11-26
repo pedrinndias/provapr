@@ -71,7 +71,8 @@ class PitMaven(ExecutorMutacao):
                "org.pitest:pitest-maven:mutationCoverage"]
         if classe:
             cmd.append(f"-DtargetClasses={classe}")
-        r = subprocess.run(cmd, cwd=projeto, capture_output=True, text=True)
+        r = subprocess.run(cmd, cwd=projeto, stdin=subprocess.DEVNULL,
+                           capture_output=True, text=True)
         if r.returncode != 0:
             raise ErroMutacao((r.stdout + r.stderr)[-2000:])
         return ler_xml(projeto / "target" / "pit-reports" / "mutations.xml")
