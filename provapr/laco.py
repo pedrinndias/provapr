@@ -125,8 +125,10 @@ def metodo_java(m, resp):
 
 
 class Laco:
-    def __init__(self, projeto, prov, mvn="mvn", entrada=input, pit=None):
+    def __init__(self, projeto, prov, mvn="mvn", entrada=input, pit=None,
+                 max_tentativas=MAX_TENTATIVAS):
         self.projeto = Path(projeto)
+        self.max_tentativas = max_tentativas
         self.prov = prov
         self.mvn = mvn
         self.entrada = entrada
@@ -189,8 +191,28 @@ class Laco:
     def ciclo(self, c, m, criterios, mortos):
         print(f"\n[{c.id}] alvo: {rotulo(m)} ({m.status})")
         arq = self.arquivo(m.classe)
+        achado = self.gerar(c, m, arq)
+        if achado:
+            t, metodo, matou = achado
+            if self.aprovar(c, m, metodo, matou, mortos, t):
+                arq.aprovados.append(metodo)
+                self.aprovados.append(t.nome)
+                mortos.update(chave_mutante(x) for x in matou)
+            arq.escrever(arq.aprovados)
+            return
+        print(f"  esgotou {self.max_tentativas} tentativas para {rotulo(m)}")
+        r = perguntar("Mutante equivalente? [e]quivalente / [m]anter vivo ", self.entrada)
+        if r == "e":
+            self.equivalentes.add(chave_mutante(m))
+            self.tentativas[-1].humano = "declarado equivalente"
+        else:
+            self.tentativas[-1].humano = "mantido vivo"
+
+    def gerar(self, c, m, arq):
+        """Até max_tentativas: IA, filtro e 3 portões. Devolve (tentativa, método, mortos)
+        com o candidato ainda no disco, ou None (arquivo de volta aos aprovados)."""
         feedback = []
-        for n in range(1, MAX_TENTATIVAS + 1):
+        for n in range(1, self.max_tentativas + 1):
             t = Tentativa(rotulo(m), n)
             self.tentativas.append(t)
             try:
@@ -236,21 +258,8 @@ class Laco:
                 continue
             t.matou = True
             t.extras = [rotulo(x) for x in matou if chave_mutante(x) != chave_mutante(m)]
-
-            if self.aprovar(c, m, metodo, matou, mortos, t):
-                arq.aprovados.append(metodo)
-                self.aprovados.append(t.nome)
-                mortos.update(chave_mutante(x) for x in matou)
-            arq.escrever(arq.aprovados)
-            return
-
-        print(f"  esgotou {MAX_TENTATIVAS} tentativas para {rotulo(m)}")
-        r = perguntar("Mutante equivalente? [e]quivalente / [m]anter vivo ", self.entrada)
-        if r == "e":
-            self.equivalentes.add(chave_mutante(m))
-            self.tentativas[-1].humano = "declarado equivalente"
-        else:
-            self.tentativas[-1].humano = "mantido vivo"
+            return t, metodo, matou
+        return None
 
     def aprovar(self, c, m, metodo, matou, mortos, t):
         chaves_c = [chave_mutante(x) for x in c.mutantes]

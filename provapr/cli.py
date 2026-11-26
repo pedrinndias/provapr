@@ -161,7 +161,7 @@ def cmd_run(args):
     imprimir(antes)
     print(final_antes)
 
-    laco = Laco(projeto, prov, args.mvn, pit=pit)
+    laco = Laco(projeto, prov, args.mvn, pit=pit, max_tentativas=args.max_tentativas)
     try:
         laco.executar(antes)
         mutantes = pit.executar(projeto)  # PIT final
@@ -201,6 +201,7 @@ def main(argv=None):
     r.add_argument("--replay", metavar="JSONL",
                    help="com --gravar no mesmo arquivo: completa o que falta ao vivo")
     r.add_argument("--saida", default=".", help="pasta do relatório MD + JSON")
+    r.add_argument("--max-tentativas", type=int, default=3)
     r.add_argument("--mvn", default="mvn")
     args = p.parse_args(argv)
     return cmd_run(args)
