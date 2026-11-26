@@ -1,0 +1,683 @@
+{
+  "data": "2026-11-26T15:37:53-03:00",
+  "comando": "python3 avaliacao/medir_geracao.py --repeticoes 5 --modelo haiku --gravar replay/aval_geracao.jsonl",
+  "modelo": "haiku",
+  "repeticoes": 5,
+  "mutantes_vivos": 6,
+  "primeiras_tentativas": 30,
+  "funil_1a_tentativa": {
+    "compilou": {
+      "n": 30,
+      "pct": 100.0
+    },
+    "passou": {
+      "n": 30,
+      "pct": 100.0
+    },
+    "matou": {
+      "n": 29,
+      "pct": 96.7
+    }
+  },
+  "tentativas_totais": 31,
+  "mortos_em_ate_3": {
+    "n": 30,
+    "de": 30,
+    "pct": 100.0
+  },
+  "chamadas_ia": 32,
+  "duracao_ia_ms_media": 6100,
+  "duracao_total_s": 758.0,
+  "casos": [
+    {
+      "repeticao": 1,
+      "criterio": "CA2",
+      "mutante": "Calculadora L10 Replaced integer subtraction with addition",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calculadora L10 Replaced integer subtraction with addition",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeSubtraiDoisInteirosDevolveDiferenca",
+          "tambem_matou": [
+            "Calculadora L10 replaced int return with 0"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 1,
+      "criterio": "CA2",
+      "mutante": "Calculadora L10 replaced int return with 0",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calculadora L10 replaced int return with 0",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeSubtraiDoisInteirosDevolveDiferenca",
+          "tambem_matou": [
+            "Calculadora L10 Replaced integer subtraction with addition"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 1,
+      "criterio": "CA3",
+      "mutante": "Calendario L5 replaced boolean return with false",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calendario L5 replaced boolean return with false",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeAnoDivisivelPor400EhBissexto",
+          "tambem_matou": [
+            "Calendario L5 Replaced integer modulus with multiplication",
+            "Calendario L5 negated conditional"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 1,
+      "criterio": "CA3",
+      "mutante": "Calendario L5 Replaced integer modulus with multiplication",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calendario L5 Replaced integer modulus with multiplication",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeBissextoDivisivelPor400",
+          "tambem_matou": [
+            "Calendario L5 negated conditional",
+            "Calendario L5 replaced boolean return with false"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 1,
+      "criterio": "CA3",
+      "mutante": "Calendario L6 replaced boolean return with true",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calendario L6 replaced boolean return with true",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeAnoSecularNaoDivisivelPor400NaoEhBissexto",
+          "tambem_matou": [
+            "Calendario L6 Replaced integer modulus with multiplication",
+            "Calendario L5 negated conditional",
+            "Calendario L6 negated conditional"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 1,
+      "criterio": "CA3",
+      "mutante": "Calendario L6 Replaced integer modulus with multiplication",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calendario L6 Replaced integer modulus with multiplication",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeAnoSeculoNaoDivisivelPor400NaoEhBissexto",
+          "tambem_matou": [
+            "Calendario L5 negated conditional",
+            "Calendario L6 negated conditional",
+            "Calendario L6 replaced boolean return with true"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 2,
+      "criterio": "CA2",
+      "mutante": "Calculadora L10 Replaced integer subtraction with addition",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calculadora L10 Replaced integer subtraction with addition",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeSubtraiDoisInteirosDevolveDiferenca",
+          "tambem_matou": [
+            "Calculadora L10 replaced int return with 0"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 2,
+      "criterio": "CA2",
+      "mutante": "Calculadora L10 replaced int return with 0",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calculadora L10 replaced int return with 0",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeSubtraiDoisInteirosDevolveDiferenca",
+          "tambem_matou": [
+            "Calculadora L10 Replaced integer subtraction with addition"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 2,
+      "criterio": "CA3",
+      "mutante": "Calendario L5 replaced boolean return with false",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calendario L5 replaced boolean return with false",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeAnoDivisivelPor400EhBissexto",
+          "tambem_matou": [
+            "Calendario L5 Replaced integer modulus with multiplication",
+            "Calendario L5 negated conditional"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 2,
+      "criterio": "CA3",
+      "mutante": "Calendario L5 Replaced integer modulus with multiplication",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calendario L5 Replaced integer modulus with multiplication",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeAnoDivisivelPor400EhBissexto",
+          "tambem_matou": [
+            "Calendario L6 Replaced integer modulus with multiplication",
+            "Calendario L5 negated conditional",
+            "Calendario L6 negated conditional",
+            "Calendario L5 replaced boolean return with false",
+            "Calendario L6 replaced boolean return with true"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 2,
+      "criterio": "CA3",
+      "mutante": "Calendario L6 replaced boolean return with true",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calendario L6 replaced boolean return with true",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeAnoSeculoNaoDivisivelPor400NaoEBissexto",
+          "tambem_matou": [
+            "Calendario L6 Replaced integer modulus with multiplication",
+            "Calendario L5 negated conditional",
+            "Calendario L6 negated conditional"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 2,
+      "criterio": "CA3",
+      "mutante": "Calendario L6 Replaced integer modulus with multiplication",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calendario L6 Replaced integer modulus with multiplication",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeSeculoNaoDivisivelPor400NaoEhBissexto",
+          "tambem_matou": [
+            "Calendario L5 Replaced integer modulus with multiplication",
+            "Calendario L5 negated conditional",
+            "Calendario L6 negated conditional",
+            "Calendario L5 replaced boolean return with false",
+            "Calendario L6 replaced boolean return with true"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 3,
+      "criterio": "CA2",
+      "mutante": "Calculadora L10 Replaced integer subtraction with addition",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calculadora L10 Replaced integer subtraction with addition",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeSubtraiDoisInteirosDevolveDiferenca",
+          "tambem_matou": [
+            "Calculadora L10 replaced int return with 0"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 3,
+      "criterio": "CA2",
+      "mutante": "Calculadora L10 replaced int return with 0",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calculadora L10 replaced int return with 0",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeSubtraiDoisInteirosDevolveDiferenca",
+          "tambem_matou": [
+            "Calculadora L10 Replaced integer subtraction with addition"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 3,
+      "criterio": "CA3",
+      "mutante": "Calendario L5 replaced boolean return with false",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calendario L5 replaced boolean return with false",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeAnoDivisivelPor400EhBissexto",
+          "tambem_matou": [
+            "Calendario L5 Replaced integer modulus with multiplication",
+            "Calendario L5 negated conditional"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 3,
+      "criterio": "CA3",
+      "mutante": "Calendario L5 Replaced integer modulus with multiplication",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calendario L5 Replaced integer modulus with multiplication",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeBissextoDivisivelPor400",
+          "tambem_matou": [
+            "Calendario L6 Replaced integer modulus with multiplication",
+            "Calendario L5 negated conditional",
+            "Calendario L6 negated conditional",
+            "Calendario L5 replaced boolean return with false",
+            "Calendario L6 replaced boolean return with true"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 3,
+      "criterio": "CA3",
+      "mutante": "Calendario L6 replaced boolean return with true",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calendario L6 replaced boolean return with true",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testSeculoNaoDivisivelPor400NaoEhBissexto",
+          "tambem_matou": [
+            "Calendario L6 Replaced integer modulus with multiplication",
+            "Calendario L5 negated conditional",
+            "Calendario L6 negated conditional"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 3,
+      "criterio": "CA3",
+      "mutante": "Calendario L6 Replaced integer modulus with multiplication",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calendario L6 Replaced integer modulus with multiplication",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeSeculoNaoDivisivelPor400NaoEhBissexto",
+          "tambem_matou": [
+            "Calendario L5 negated conditional",
+            "Calendario L6 negated conditional",
+            "Calendario L6 replaced boolean return with true"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 4,
+      "criterio": "CA2",
+      "mutante": "Calculadora L10 Replaced integer subtraction with addition",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calculadora L10 Replaced integer subtraction with addition",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeSubtraiDoisInteirosDevolveDiferenca",
+          "tambem_matou": [
+            "Calculadora L10 replaced int return with 0"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 4,
+      "criterio": "CA2",
+      "mutante": "Calculadora L10 replaced int return with 0",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calculadora L10 replaced int return with 0",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeSubtraiDoisInteirosDevolveDiferenca",
+          "tambem_matou": [
+            "Calculadora L10 Replaced integer subtraction with addition"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 4,
+      "criterio": "CA3",
+      "mutante": "Calendario L5 replaced boolean return with false",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calendario L5 replaced boolean return with false",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeAnoDivisivelPor400EhBissexto",
+          "tambem_matou": [
+            "Calendario L5 Replaced integer modulus with multiplication",
+            "Calendario L5 negated conditional"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 4,
+      "criterio": "CA3",
+      "mutante": "Calendario L5 Replaced integer modulus with multiplication",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calendario L5 Replaced integer modulus with multiplication",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": false,
+          "humano": "—",
+          "nome_teste": "testeAnoDivisivelPor4NaoSeculoEhBissexto",
+          "tambem_matou": []
+        },
+        {
+          "mutante": "Calendario L5 Replaced integer modulus with multiplication",
+          "n": 2,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeBissextoDivisivelPor400",
+          "tambem_matou": [
+            "Calendario L5 negated conditional",
+            "Calendario L5 replaced boolean return with false"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 4,
+      "criterio": "CA3",
+      "mutante": "Calendario L6 replaced boolean return with true",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calendario L6 replaced boolean return with true",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testAnoSeculoNaoDivisivelPor400NaoEhBissexto",
+          "tambem_matou": [
+            "Calendario L6 Replaced integer modulus with multiplication",
+            "Calendario L5 negated conditional",
+            "Calendario L6 negated conditional"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 4,
+      "criterio": "CA3",
+      "mutante": "Calendario L6 Replaced integer modulus with multiplication",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calendario L6 Replaced integer modulus with multiplication",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeSeculoNaoDivisivelPor400NaoBissexto",
+          "tambem_matou": [
+            "Calendario L5 negated conditional",
+            "Calendario L6 negated conditional",
+            "Calendario L6 replaced boolean return with true"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 5,
+      "criterio": "CA2",
+      "mutante": "Calculadora L10 Replaced integer subtraction with addition",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calculadora L10 Replaced integer subtraction with addition",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeSubtraiDoisInteirosDevolveDiferenca",
+          "tambem_matou": [
+            "Calculadora L10 replaced int return with 0"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 5,
+      "criterio": "CA2",
+      "mutante": "Calculadora L10 replaced int return with 0",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calculadora L10 replaced int return with 0",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeSubtraiDoisInteirosDevolveDiferenca",
+          "tambem_matou": [
+            "Calculadora L10 Replaced integer subtraction with addition"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 5,
+      "criterio": "CA3",
+      "mutante": "Calendario L5 replaced boolean return with false",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calendario L5 replaced boolean return with false",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeAnoDivisivelPor400EhBissexto",
+          "tambem_matou": [
+            "Calendario L5 Replaced integer modulus with multiplication",
+            "Calendario L5 negated conditional"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 5,
+      "criterio": "CA3",
+      "mutante": "Calendario L5 Replaced integer modulus with multiplication",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calendario L5 Replaced integer modulus with multiplication",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeBissextoDivisivelPor400",
+          "tambem_matou": [
+            "Calendario L5 negated conditional",
+            "Calendario L5 replaced boolean return with false"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 5,
+      "criterio": "CA3",
+      "mutante": "Calendario L6 replaced boolean return with true",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calendario L6 replaced boolean return with true",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testAnoDivisivelPor100NaoPor400NaoEhBissexto",
+          "tambem_matou": [
+            "Calendario L6 Replaced integer modulus with multiplication",
+            "Calendario L5 negated conditional",
+            "Calendario L6 negated conditional"
+          ]
+        }
+      ]
+    },
+    {
+      "repeticao": 5,
+      "criterio": "CA3",
+      "mutante": "Calendario L6 Replaced integer modulus with multiplication",
+      "matou_em_ate_3": true,
+      "tentativas": [
+        {
+          "mutante": "Calendario L6 Replaced integer modulus with multiplication",
+          "n": 1,
+          "compilou": true,
+          "passou": true,
+          "matou": true,
+          "humano": "—",
+          "nome_teste": "testeAnoSeculoNaoDivisivelPor400NaoEhBissexto",
+          "tambem_matou": [
+            "Calendario L5 Replaced integer modulus with multiplication",
+            "Calendario L5 negated conditional",
+            "Calendario L6 negated conditional",
+            "Calendario L5 replaced boolean return with false",
+            "Calendario L6 replaced boolean return with true"
+          ]
+        }
+      ]
+    }
+  ]
+}
