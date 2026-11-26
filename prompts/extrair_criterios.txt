@@ -1,0 +1,12 @@
+Leia a issue abaixo e extraia os critérios de aceitação, na ordem em que aparecem.
+Para cada critério, devolva:
+- id: CA1, CA2, ... na ordem da issue;
+- descricao: o critério em uma frase curta;
+- funcoes: os métodos da lista abaixo que implementam o critério (lista vazia se nenhum serve);
+- exemplos: os exemplos concretos de entrada e saída citados, no formato "entrada -> saída".
+
+Métodos públicos do projeto (use só estes ids):
+<<METODOS>>
+
+Issue:
+<<ISSUE>>
