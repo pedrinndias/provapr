@@ -1,0 +1,140 @@
+{
+  "por_entrada": [
+    {
+      "entrada": "E1",
+      "criterios_ia": [
+        3,
+        3,
+        3
+      ],
+      "gabarito": 3,
+      "precisao": 100.0,
+      "revocacao": 100.0,
+      "estabilidade_jaccard": 1.0,
+      "cobertos_por_execucao": [
+        [
+          "CA1",
+          "CA2",
+          "CA3"
+        ],
+        [
+          "CA1",
+          "CA2",
+          "CA3"
+        ],
+        [
+          "CA1",
+          "CA2",
+          "CA3"
+        ]
+      ]
+    },
+    {
+      "entrada": "E2",
+      "criterios_ia": [
+        1,
+        1,
+        1
+      ],
+      "gabarito": 4,
+      "precisao": 100.0,
+      "revocacao": 50.0,
+      "estabilidade_jaccard": 1.0,
+      "cobertos_por_execucao": [
+        [
+          "CA1",
+          "CA3"
+        ],
+        [
+          "CA1",
+          "CA3"
+        ],
+        [
+          "CA1",
+          "CA3"
+        ]
+      ]
+    },
+    {
+      "entrada": "E3",
+      "criterios_ia": [
+        2,
+        1,
+        4
+      ],
+      "gabarito": 4,
+      "precisao": 100.0,
+      "revocacao": 50.0,
+      "estabilidade_jaccard": 1.0,
+      "cobertos_por_execucao": [
+        [
+          "CA1",
+          "CA4"
+        ],
+        [
+          "CA1",
+          "CA4"
+        ],
+        [
+          "CA1",
+          "CA4"
+        ]
+      ]
+    },
+    {
+      "entrada": "E4",
+      "criterios_ia": [
+        1,
+        1,
+        1
+      ],
+      "gabarito": 4,
+      "precisao": 100.0,
+      "revocacao": 25.0,
+      "estabilidade_jaccard": 1.0,
+      "cobertos_por_execucao": [
+        [
+          "CA1"
+        ],
+        [
+          "CA1"
+        ],
+        [
+          "CA1"
+        ]
+      ]
+    },
+    {
+      "entrada": "E5",
+      "criterios_ia": [
+        2,
+        2,
+        1
+      ],
+      "gabarito": 5,
+      "precisao": 100.0,
+      "revocacao": 40.0,
+      "estabilidade_jaccard": 1.0,
+      "cobertos_por_execucao": [
+        [
+          "CA1",
+          "CA3"
+        ],
+        [
+          "CA1",
+          "CA3"
+        ],
+        [
+          "CA1",
+          "CA3"
+        ]
+      ]
+    }
+  ],
+  "total": {
+    "ia": 27,
+    "ia_ok": 27,
+    "gab": 60,
+    "gab_ok": 30
+  }
+}

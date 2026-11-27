@@ -44,10 +44,37 @@ o MutGen chega a 89,5% de mutation score no HumanEval-Java. Aqui os portões des
 
 ## Q3. A extração é fiel à issue?
 
-**Pendente.** Depende de `avaliacao/gabarito.md`, escrito por Pedro **antes** de rodar `medir_extracao.py`
-(issue-2.md + US-01 a US-04 do A5 × 3 execuções). Evidência parcial, sem gabarito: nas 3 extrações ao vivo da `issue-2.md` gravadas no repositório
-(`replay/dia2.jsonl`, `replay/demo.jsonl`, `replay/aval_geracao.jsonl`), sempre saíram 3 critérios e o mesmo mapeamento (CA1 → `Calculadora#soma`, CA2 → `Calculadora#subtrai`,
-CA3 → `Calendario#ehBissexto`); o texto das descrições variou.
+Comando: `python3 avaliacao/medir_extracao.py extrair --repeticoes 3 --modelo haiku --gravar replay/aval_extracao.jsonl`, depois
+`python3 avaliacao/medir_extracao.py medir` (dados em `avaliacao/extracao.json`, casamento em `avaliacao/casamento.json`, números em
+`avaliacao/extracao_metricas.json`). 5 entradas × 3 execuções independentes = 15 chamadas, média de 5.984 ms, 2 min 53 s.
+Entradas: `issue-2.md` (critérios escritos) e US-01 a US-04 de `pedrinndias/study` (só a frase da história, **sem critérios escritos**).
+
+**Quem julgou:** a pedido de Pedro, o gabarito (`avaliacao/gabarito.md`) e o casamento foram escritos pelo Claude (Opus 5.5), com o gabarito
+escrito antes da extração. Nas histórias, então, isto mede a concordância entre dois modelos, não a de um revisor humano. Na `issue-2.md`
+o gabarito é cópia literal da issue, e o resultado não depende de quem escreveu.
+
+| Entrada | Critérios da IA (3 execuções) | Gabarito | Precisão | Revocação | Estabilidade (Jaccard) |
+|---|---|---|---|---|---|
+| E1 `issue-2.md` | 3, 3, 3 | 3 | 100% | 100% | 1,00 |
+| E2 US-01 login institucional | 1, 1, 1 | 4 | 100% | 50% | 1,00 |
+| E3 US-02 perfil | 2, 1, 4 | 4 | 100% | 50% | 1,00 |
+| E4 US-03 amigos | 1, 1, 1 | 4 | 100% | 25% | 1,00 |
+| E5 US-04 grupo de estudos | 2, 2, 1 | 5 | 100% | 40% | 1,00 |
+| **Total** | | | **100%** | **50%** | |
+
+Precisão = critérios da IA que casam com algum do gabarito; revocação = critérios do gabarito cobertos, somados nas 3 execuções;
+estabilidade = Jaccard médio, entre pares de execuções, do conjunto de critérios do gabarito cobertos.
+
+Leitura:
+- **Issue com critérios escritos:** extração literal e estável. 3 de 3 nas 3 execuções, mesmo mapeamento (CA1 → `Calculadora#soma`,
+  CA2 → `Calculadora#subtrai`, CA3 → `Calendario#ehBissexto`); só a redação variou (como nas gravações `dia2`, `demo` e `aval_geracao`).
+- **História sem critérios:** a IA não inventa. Devolve só o que a frase afirma (o caminho feliz e o objetivo do "de modo que"), quase sempre
+  avisando "critério inferido; a issue não traz critérios explícitos". Por isso a precisão fica em 100% e a revocação em 50%: os casos de erro
+  e de borda do gabarito (credencial inválida, pedido repetido, campo obrigatório, sair do grupo) não aparecem.
+- O número de critérios varia entre execuções (E3: 2, 1, 4), mas o conjunto coberto não muda (Jaccard 1,00): a IA ora junta, ora separa
+  os mesmos comportamentos.
+- **Consequência para o ProvaPR:** "LIBERADO" vale para os critérios escritos na issue. Numa história sem critérios, a ferramenta provaria
+  só o caminho feliz; o que falta escrever é trabalho do time, não da IA. Isso reforça a decisão de a IA *extrair* e não *inventar* critérios.
 
 ## Q4. Cabe no fluxo de um PR?
 
@@ -63,3 +90,4 @@ Alvo do plano: demo ≤ 2 min ao vivo. **Cumprido** (1 min 45 s). O custo é dom
 ## O que não foi medido
 
 Repositório grande, outras linguagens, mutantes equivalentes reais em código de produção e comparação estatística.
+Gabarito do Q3 escrito por um revisor humano (aqui foi o Claude, a pedido de Pedro) e extração em histórias que tenham critérios escritos.

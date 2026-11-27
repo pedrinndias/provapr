@@ -1,0 +1,301 @@
+{
+  "data": "2026-11-26T21:16:32-03:00",
+  "modelo": "haiku",
+  "repeticoes": 3,
+  "chamadas_ia": 15,
+  "duracao_ia_ms_media": 5984,
+  "duracao_total_s": 173.1,
+  "execucoes": [
+    {
+      "entrada": "E1",
+      "repeticao": 1,
+      "criterios": [
+        {
+          "id": "CA1",
+          "descricao": "Somar dois inteiros devolve a soma deles.",
+          "funcoes": [
+            "Calculadora#soma"
+          ],
+          "exemplos": [
+            "2 + 3 -> 5"
+          ]
+        },
+        {
+          "id": "CA2",
+          "descricao": "Subtrair dois inteiros devolve a diferença.",
+          "funcoes": [
+            "Calculadora#subtrai"
+          ],
+          "exemplos": [
+            "10 - 4 -> 6"
+          ]
+        },
+        {
+          "id": "CA3",
+          "descricao": "Dizer se um ano é bissexto: divisível por 4, exceto os divisíveis por 100, que só são bissextos se também forem divisíveis por 400.",
+          "funcoes": [
+            "Calendario#ehBissexto"
+          ],
+          "exemplos": [
+            "2000 -> true",
+            "1900 -> false"
+          ]
+        }
+      ]
+    },
+    {
+      "entrada": "E1",
+      "repeticao": 2,
+      "criterios": [
+        {
+          "id": "CA1",
+          "descricao": "Somar dois inteiros devolve a soma deles.",
+          "funcoes": [
+            "Calculadora#soma"
+          ],
+          "exemplos": [
+            "2 + 3 -> 5"
+          ]
+        },
+        {
+          "id": "CA2",
+          "descricao": "Subtrair dois inteiros devolve a diferença deles.",
+          "funcoes": [
+            "Calculadora#subtrai"
+          ],
+          "exemplos": [
+            "10 - 4 -> 6"
+          ]
+        },
+        {
+          "id": "CA3",
+          "descricao": "Dizer se um ano é bissexto: divisível por 4, exceto os divisíveis por 100, que só são bissextos se também forem divisíveis por 400.",
+          "funcoes": [
+            "Calendario#ehBissexto"
+          ],
+          "exemplos": [
+            "2000 -> bissexto",
+            "1900 -> não bissexto"
+          ]
+        }
+      ]
+    },
+    {
+      "entrada": "E1",
+      "repeticao": 3,
+      "criterios": [
+        {
+          "id": "CA1",
+          "descricao": "Somar dois inteiros devolve a soma deles.",
+          "funcoes": [
+            "Calculadora#soma"
+          ],
+          "exemplos": [
+            "2 + 3 -> 5"
+          ]
+        },
+        {
+          "id": "CA2",
+          "descricao": "Subtrair dois inteiros devolve a diferença deles.",
+          "funcoes": [
+            "Calculadora#subtrai"
+          ],
+          "exemplos": [
+            "10 - 4 -> 6"
+          ]
+        },
+        {
+          "id": "CA3",
+          "descricao": "Dizer se um ano é bissexto: divisível por 4, exceto os divisíveis por 100, que só são bissextos se também forem divisíveis por 400.",
+          "funcoes": [
+            "Calendario#ehBissexto"
+          ],
+          "exemplos": [
+            "2000 -> true",
+            "1900 -> false"
+          ]
+        }
+      ]
+    },
+    {
+      "entrada": "E2",
+      "repeticao": 1,
+      "criterios": [
+        {
+          "id": "CA1",
+          "descricao": "Aluno da PUC entra no app com suas credenciais institucionais, e só membros reais da universidade fazem parte da rede (critério inferido da história de usuário; a issue não traz lista explícita de critérios).",
+          "funcoes": [],
+          "exemplos": []
+        }
+      ]
+    },
+    {
+      "entrada": "E2",
+      "repeticao": 2,
+      "criterios": [
+        {
+          "id": "CA1",
+          "descricao": "O aluno da PUC entra no app com suas credenciais institucionais, e apenas membros reais da universidade podem fazer parte da rede.",
+          "funcoes": [],
+          "exemplos": []
+        }
+      ]
+    },
+    {
+      "entrada": "E2",
+      "repeticao": 3,
+      "criterios": [
+        {
+          "id": "CA1",
+          "descricao": "Aluno entra no app com credenciais institucionais da PUC, e só membros reais da universidade fazem parte da rede. A issue não traz critérios explícitos; este foi derivado da história de usuário.",
+          "funcoes": [],
+          "exemplos": []
+        }
+      ]
+    },
+    {
+      "entrada": "E3",
+      "repeticao": 1,
+      "criterios": [
+        {
+          "id": "CA1",
+          "descricao": "Aluno monta o próprio perfil informando curso, período e interesses (critério inferido da história; a issue não lista critérios explícitos).",
+          "funcoes": [],
+          "exemplos": []
+        },
+        {
+          "id": "CA2",
+          "descricao": "Colegas com afinidade conseguem encontrar o perfil do aluno a partir desses dados (critério inferido da história; a issue não lista critérios explícitos).",
+          "funcoes": [],
+          "exemplos": []
+        }
+      ]
+    },
+    {
+      "entrada": "E3",
+      "repeticao": 2,
+      "criterios": [
+        {
+          "id": "CA1",
+          "descricao": "Sem critérios de aceitação explícitos na issue. Único requisito declarado (da história): o aluno monta perfil com curso, período e interesses para ser encontrado por colegas com afinidade.",
+          "funcoes": [],
+          "exemplos": []
+        }
+      ]
+    },
+    {
+      "entrada": "E3",
+      "repeticao": 3,
+      "criterios": [
+        {
+          "id": "CA1",
+          "descricao": "Aluno consegue montar o perfil informando o curso (inferido da história; a issue não lista critérios explícitos).",
+          "funcoes": [],
+          "exemplos": []
+        },
+        {
+          "id": "CA2",
+          "descricao": "Aluno consegue informar o período em que está no curso (inferido da história; a issue não lista critérios explícitos).",
+          "funcoes": [],
+          "exemplos": []
+        },
+        {
+          "id": "CA3",
+          "descricao": "Aluno consegue informar seus interesses no perfil (inferido da história; a issue não lista critérios explícitos).",
+          "funcoes": [],
+          "exemplos": []
+        },
+        {
+          "id": "CA4",
+          "descricao": "O perfil fica disponível para que colegas com afinidade possam encontrar o aluno (inferido da história; a issue não lista critérios explícitos).",
+          "funcoes": [],
+          "exemplos": []
+        }
+      ]
+    },
+    {
+      "entrada": "E4",
+      "repeticao": 1,
+      "criterios": [
+        {
+          "id": "CA1",
+          "descricao": "Aluno pode adicionar outros alunos à sua lista de amigos (inferido da história de usuário; a issue não lista critérios explícitos).",
+          "funcoes": [],
+          "exemplos": []
+        }
+      ]
+    },
+    {
+      "entrada": "E4",
+      "repeticao": 2,
+      "criterios": [
+        {
+          "id": "CA1",
+          "descricao": "Inferido da história, pois a issue não lista critérios explícitos: o aluno consegue adicionar outros alunos à sua lista de amigos.",
+          "funcoes": [],
+          "exemplos": []
+        }
+      ]
+    },
+    {
+      "entrada": "E4",
+      "repeticao": 3,
+      "criterios": [
+        {
+          "id": "CA1",
+          "descricao": "Aluno pode adicionar outro aluno à sua lista de amigos (critério inferido da história de usuário, pois a issue não traz critérios explícitos).",
+          "funcoes": [],
+          "exemplos": []
+        }
+      ]
+    },
+    {
+      "entrada": "E5",
+      "repeticao": 1,
+      "criterios": [
+        {
+          "id": "CA1",
+          "descricao": "Aluno cria um grupo de estudos vinculado a uma disciplina. A issue não lista critérios explícitos; este foi derivado da história de usuário.",
+          "funcoes": [],
+          "exemplos": []
+        },
+        {
+          "id": "CA2",
+          "descricao": "Aluno encontra colegas da mesma disciplina para revisar antes das provas. Critério derivado da história de usuário, pois a issue não traz lista explícita.",
+          "funcoes": [],
+          "exemplos": []
+        }
+      ]
+    },
+    {
+      "entrada": "E5",
+      "repeticao": 2,
+      "criterios": [
+        {
+          "id": "CA1",
+          "descricao": "Como aluno, consigo criar um grupo de estudos vinculado a uma disciplina.",
+          "funcoes": [],
+          "exemplos": []
+        },
+        {
+          "id": "CA2",
+          "descricao": "Como aluno, encontro colegas da mesma disciplina para revisar antes das provas.",
+          "funcoes": [],
+          "exemplos": []
+        }
+      ]
+    },
+    {
+      "entrada": "E5",
+      "repeticao": 3,
+      "criterios": [
+        {
+          "id": "CA1",
+          "descricao": "A issue não traz critérios de aceitação explícitos; só a história: o aluno cria grupo de estudos de uma disciplina e encontra colegas da mesma matéria para revisar antes das provas.",
+          "funcoes": [],
+          "exemplos": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "decidido_por": "Claude (Opus 5.5), a pedido de Pedro Soares, depois de ler avaliacao/extracao.json; revisão de Pedro pendente",
+  "regra": "Um critério da IA casa com um critério do gabarito quando o texto da IA afirma o mesmo comportamento observável. Critério composto pode casar com mais de um (lista). null = não casa com nenhum. Redundância (dois critérios da IA para o mesmo do gabarito) conta como acerto de precisão, mas cobre o critério do gabarito uma vez só.",
+  "notas": {
+    "E2": "'só membros reais da universidade fazem parte da rede' afirma a exclusão de quem não é da PUC, então casa também com CA3.",
+    "E3-2": "O texto diz que não há critérios explícitos, mas enuncia o requisito (montar perfil com curso, período e interesses para ser encontrado): casa com CA1 e CA4.",
+    "E3-3": "CA1 a CA3 da IA desdobram o CA1 do gabarito (um por campo).",
+    "E5": "'encontra colegas da mesma disciplina' corresponde a achar o grupo pela disciplina (CA3)."
+  },
+  "casamento": {
+    "E1": {"1": {"CA1": "CA1", "CA2": "CA2", "CA3": "CA3"},
+           "2": {"CA1": "CA1", "CA2": "CA2", "CA3": "CA3"},
+           "3": {"CA1": "CA1", "CA2": "CA2", "CA3": "CA3"}},
+    "E2": {"1": {"CA1": ["CA1", "CA3"]},
+           "2": {"CA1": ["CA1", "CA3"]},
+           "3": {"CA1": ["CA1", "CA3"]}},
+    "E3": {"1": {"CA1": "CA1", "CA2": "CA4"},
+           "2": {"CA1": ["CA1", "CA4"]},
+           "3": {"CA1": "CA1", "CA2": "CA1", "CA3": "CA1", "CA4": "CA4"}},
+    "E4": {"1": {"CA1": "CA1"},
+           "2": {"CA1": "CA1"},
+           "3": {"CA1": "CA1"}},
+    "E5": {"1": {"CA1": "CA1", "CA2": "CA3"},
+           "2": {"CA1": "CA1", "CA2": "CA3"},
+           "3": {"CA1": ["CA1", "CA3"]}}
+  }
+}
