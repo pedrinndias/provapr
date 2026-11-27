@@ -18,6 +18,11 @@ class TestStatus(unittest.TestCase):
         self.assertEqual(rastreio.status(["X#f"], [m("KILLED"), m("SURVIVED")]), rastreio.FRACO)
         self.assertEqual(rastreio.status(["X#f"], [m("KILLED"), m("TIMED_OUT")]), rastreio.PROVADO)
 
+    def test_sem_mutante_nao_prova(self):
+        st = rastreio.status(["X#f"], [])
+        self.assertEqual(st, rastreio.SEM_MUTANTE)
+        self.assertEqual(rastreio.veredito([rastreio.PROVADO, st]), rastreio.BLOQUEADO)
+
     def test_equivalente_sai_do_denominador(self):
         vivo = m("SURVIVED")
         self.assertEqual(rastreio.status(["X#f"], [m("KILLED"), vivo], [vivo]), rastreio.PROVADO)

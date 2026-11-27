@@ -267,7 +267,8 @@ class Laco:
         novos = {chave_mutante(x) for x in matou}
         depois = sum(1 for x in c.mutantes
                      if x.morto or chave_mutante(x) in mortos or chave_mutante(x) in novos)
-        print(f"  passou nos 3 portões (compila, passa no original, mata o alvo) — tentativa {t.n}")
+        print(f"  teste proposto pela IA passou nos 3 portões (compila, passa no original, "
+              f"mata o alvo) — tentativa {t.n}")
         print("  " + "-" * 60)
         print(metodo.rstrip())
         print("  " + "-" * 60)

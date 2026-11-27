@@ -7,6 +7,9 @@ Nada é aprovado nem fica no disco: a aprovação humana é medida nas execuçõ
 
   python3 avaliacao/medir_geracao.py --repeticoes 5 --modelo haiku --gravar replay/aval_geracao.jsonl
   python3 avaliacao/medir_geracao.py --repeticoes 5 --replay replay/aval_geracao.jsonl
+
+Em replay, só confere o funil contra avaliacao/geracao.json (não sobrescreve o registro ao vivo),
+a menos que --saida seja dado.
 """
 import argparse
 import json
@@ -42,7 +45,7 @@ def main(argv=None):
     g = p.add_mutually_exclusive_group(required=True)
     g.add_argument("--gravar")
     g.add_argument("--replay")
-    p.add_argument("--saida", default=str(RAIZ / "avaliacao" / "geracao.json"))
+    p.add_argument("--saida", help="padrão: avaliacao/geracao.json ao gravar; em replay, só confere")
     args = p.parse_args(argv)
 
     inicio = time.monotonic()
@@ -96,8 +99,15 @@ def main(argv=None):
         "duracao_total_s": round(time.monotonic() - inicio, 1),
         "casos": casos,
     }
-    Path(args.saida).write_text(json.dumps(dados, ensure_ascii=False, indent=2) + "\n",
-                                encoding="utf-8")
+    registro = RAIZ / "avaliacao" / "geracao.json"
+    if args.saida or not args.replay:
+        Path(args.saida or registro).write_text(json.dumps(dados, ensure_ascii=False, indent=2) + "\n",
+                                                encoding="utf-8")
+    elif registro.exists():
+        gravado = json.loads(registro.read_text(encoding="utf-8"))
+        chaves = ("funil_1a_tentativa", "tentativas_totais", "mortos_em_ate_3")
+        igual = all(gravado.get(k) == dados[k] for k in chaves)
+        print("replay igual ao geracao.json" if igual else "replay DIFERE do geracao.json")
     print(f"\n1ª tentativa (n={n}): compila {funil['compilou']} ({pct(funil['compilou'], n)}%), "
           f"passa {funil['passou']} ({pct(funil['passou'], n)}%), "
           f"mata {funil['matou']} ({pct(funil['matou'], n)}%)")

@@ -3,6 +3,7 @@ from dataclasses import dataclass, field
 
 PROVADO, FRACO, SEM_TESTE = "PROVADO", "FRACO", "SEM_TESTE"
 NAO_RASTREADO, SUITE_VERMELHA = "NAO_RASTREADO", "SUITE_VERMELHA"
+SEM_MUTANTE = "SEM_MUTANTE"
 LIBERADO, BLOQUEADO = "LIBERADO", "BLOQUEADO"
 
 
@@ -28,6 +29,10 @@ class Criterio:
 def status(funcoes, mutantes, equivalentes=()):
     if not funcoes:
         return NAO_RASTREADO
+    if not mutantes:
+        # nenhum mutante nas funções ligadas: nada prova o critério (PIT mal configurado,
+        # classe fora de targetClasses ou função sem operador mutável)
+        return SEM_MUTANTE
     considerados = [m for m in mutantes if m not in equivalentes]
     if all(m.morto for m in considerados):
         return PROVADO

@@ -81,6 +81,19 @@ class TestCLI(unittest.TestCase):
         self.assertIn("'soma(a, b)' fora do enum", err)
         self.assertNotIn("Traceback", err)
 
+    def test_entrada_errada_sai_com_2_sem_traceback(self):
+        for extra, trecho in ((["--issue", "nao-existe.md"], "arquivo não encontrado"),
+                              (["--mvn", "/nao/existe/mvn"], "Maven não encontrado"),
+                              (["--projeto", "/nao/existe"], "não achei pom.xml")):
+            out, err = io.StringIO(), io.StringIO()
+            argv = ["run", "--projeto", str(self.proj), "--issue", str(self.issue),
+                    "--replay", str(DEMO), "--saida", str(self.dir)] + extra
+            with contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
+                codigo = cli.main(argv)
+            self.assertEqual(codigo, 2)
+            self.assertIn(trecho, err.getvalue())
+            self.assertNotIn("Traceback", err.getvalue())
+
     def test_ac6_chave_ausente_sai_com_2(self):
         arq = self.dir / "vazio.jsonl"
         arq.write_text("")

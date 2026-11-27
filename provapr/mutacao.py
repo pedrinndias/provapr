@@ -71,8 +71,19 @@ class PitMaven(ExecutorMutacao):
                "org.pitest:pitest-maven:mutationCoverage"]
         if classe:
             cmd.append(f"-DtargetClasses={classe}")
+        xml = projeto / "target" / "pit-reports" / "mutations.xml"
+        xml.unlink(missing_ok=True)  # nunca ler o relatório de uma execução anterior
         r = subprocess.run(cmd, cwd=projeto, stdin=subprocess.DEVNULL,
                            capture_output=True, text=True)
         if r.returncode != 0:
             raise ErroMutacao((r.stdout + r.stderr)[-2000:])
-        return ler_xml(projeto / "target" / "pit-reports" / "mutations.xml")
+        if not xml.exists():
+            raise ErroMutacao(
+                "o PIT não gerou target/pit-reports/mutations.xml. Configure o pitest-maven no pom "
+                "com outputFormats XML, timestampedReports=false e fullMutationMatrix=true "
+                "(copie o <plugin> de exemplos/calculadora/pom.xml)")
+        if "<mutation " in xml.read_text(encoding="utf-8") and \
+                "<succeedingTests" not in xml.read_text(encoding="utf-8"):
+            raise ErroMutacao("mutations.xml sem succeedingTests: ligue fullMutationMatrix=true "
+                              "no pitest-maven (veja exemplos/calculadora/pom.xml)")
+        return ler_xml(xml)

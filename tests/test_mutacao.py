@@ -5,7 +5,7 @@ import unittest
 from collections import Counter
 from pathlib import Path
 
-from provapr.mutacao import Mutante, PitMaven, ler_xml
+from provapr.mutacao import ErroMutacao, Mutante, PitMaven, ler_xml
 
 RAIZ = Path(__file__).resolve().parent.parent
 FIXTURE = RAIZ / "tests" / "fixtures" / "mutations_baseline.xml"
@@ -77,6 +77,26 @@ class TestIntegracaoPit(unittest.TestCase):
             dest = Path(tmp) / "calc"
             shutil.copytree(EXEMPLO, dest, ignore=shutil.ignore_patterns("target"))
             conferir_baseline(self, PitMaven().executar(dest))
+
+    def test_pom_sem_xml_e_erro_claro(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            dest = Path(tmp) / "calc"
+            shutil.copytree(EXEMPLO, dest, ignore=shutil.ignore_patterns("target"))
+            pom = dest / "pom.xml"
+            pom.write_text(pom.read_text().replace("<param>XML</param>", "").replace(
+                "<fullMutationMatrix>true</fullMutationMatrix>", ""))  # só HTML, padrão do PIT
+            with self.assertRaisesRegex(ErroMutacao, "mutations.xml"):
+                PitMaven().executar(dest)
+
+    def test_pom_sem_matriz_completa_e_erro_claro(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            dest = Path(tmp) / "calc"
+            shutil.copytree(EXEMPLO, dest, ignore=shutil.ignore_patterns("target"))
+            pom = dest / "pom.xml"
+            pom.write_text(pom.read_text().replace(
+                "<fullMutationMatrix>true</fullMutationMatrix>", ""))
+            with self.assertRaisesRegex(ErroMutacao, "fullMutationMatrix"):
+                PitMaven().executar(dest)
 
 
 if __name__ == "__main__":

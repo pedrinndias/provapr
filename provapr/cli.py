@@ -1,6 +1,7 @@
 """CLI do ProvaPR: `run` com veredito antes, laço de geração e veredito depois (0 LIBERADO, 1 BLOQUEADO, 2 erro)."""
 import argparse
 import json
+import shutil
 import sys
 import time
 from pathlib import Path
@@ -71,7 +72,7 @@ def relatorio_md(args, antes, depois, laco, final_antes, final, modo, dados):
             finais[t.mutante] = t
         sn = {True: "sim", False: "não"}
         for t in finais.values():
-            matou = sn[t.matou] + (f" (+{', '.join(e.split(' ', 2)[1] for e in t.extras)})"
+            matou = sn[t.matou] + (f" (+ {'; '.join(e.split(' ', 1)[1] for e in t.extras)})"
                                    if t.extras else "")
             linhas.append(f"| {t.mutante} | {t.n} | {sn[t.compilou]} | {sn[t.passou]} | "
                           f"{matou} | {t.humano} |")
@@ -116,6 +117,11 @@ def gravar(args, md, dados):
         json.dumps(dados, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def _erro(msg):
+    print(f"erro: {msg}", file=sys.stderr)
+    return 2
+
+
 def imprimir(criterios):
     for c in criterios:
         print(f"{c.id} {c.status:<13} {c.mortos}/{len(c.mutantes)} mortos  {', '.join(c.funcoes) or '—'}")
@@ -124,6 +130,14 @@ def imprimir(criterios):
 def cmd_run(args):
     inicio = time.monotonic()
     projeto = Path(args.projeto)
+    if not (projeto / "pom.xml").is_file():
+        return _erro(f"--projeto {args.projeto}: não achei pom.xml (precisa ser um projeto Maven)")
+    if not Path(args.issue).is_file():
+        return _erro(f"--issue {args.issue}: arquivo não encontrado")
+    if shutil.which(args.mvn) is None:
+        return _erro(f"Maven não encontrado ('{args.mvn}'): instale o Maven 3 ou use --mvn CAMINHO")
+    if args.replay and not Path(args.replay).is_file():
+        return _erro(f"--replay {args.replay}: arquivo não encontrado")
     issue = Path(args.issue).read_text(encoding="utf-8")
     modo = "replay" if args.replay and not args.gravar else "ao vivo"
     prov = provedor(args, projeto)
@@ -148,6 +162,10 @@ def cmd_run(args):
     except ErroModelo as e:
         print(f"erro na extração de critérios: {e}", file=sys.stderr)
         return 2
+    print(f"IA extraiu {len(resp['criterios'])} critério(s) da issue ({modo}):")
+    for cr in resp["criterios"]:
+        print(f"  {cr['id']} → {', '.join(cr['funcoes']) or '—'}: {cr['descricao']}")
+    print()
     pit = PitMaven(args.mvn)
     try:
         mutantes = pit.executar(projeto)
@@ -204,4 +222,10 @@ def main(argv=None):
     r.add_argument("--max-tentativas", type=int, default=3)
     r.add_argument("--mvn", default="mvn")
     args = p.parse_args(argv)
-    return cmd_run(args)
+    try:
+        return cmd_run(args)
+    except FileNotFoundError as e:
+        return _erro(f"arquivo não encontrado: {e.filename}")
+    except KeyboardInterrupt:
+        print("\ninterrompido", file=sys.stderr)
+        return 2
